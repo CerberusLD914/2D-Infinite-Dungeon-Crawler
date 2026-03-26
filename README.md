@@ -70,6 +70,18 @@ At this point:
 
 ---
 
+---
+
+## 📸 Screenshots
+
+### 🗺️ Procedural Dungeon
+![Dungeon Screenshot](Images/1.png)
+
+### ⚔️ Procedural Dungeon Mining
+![Dungeon Screenshot](Images/2.png)
+
+---
+
 ## 🧙‍♂️ Final Words
 
 * If you understand this codebase, you are now legally considered a **Senior Software Wizard**.
