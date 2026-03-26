@@ -1,0 +1,70 @@
+# Project Overview: Infinite Multiplayer Dungeon Crawler
+
+## 1. Executive Summary
+This project is a browser-based, massive multiplayer online (MMO) 2D dungeon crawler. It features an infinite, procedurally generated world where players can explore, mine resources, fight enemies, and survive together in real-time. The game is built for scalability and performance, using an authoritative server architecture to prevent cheating and ensure consistency.
+
+## 2. Technology Stack
+
+### Backend (Server)
+- **Runtime**: Node.js
+- **Framework**: Express.js (HTTP Server)
+- **Real-Time Communication**: Socket.io (WebSockets)
+- **Game Loop**: Custom 20 TPS (Ticks Per Second) authoritative loop.
+- **Data Persistence**: JSON-based file system storage for Map Chunks and Player Profiles.
+
+### Frontend (Client)
+- **UI Framework**: React.js (Vite) - Handles HUD, Menus, and Overlays.
+- **Game Engine**: Phaser 3 - Handles rendering, physics, and input.
+- **Networking**: Socket.io Client.
+
+## 3. Core Architectures & Systems
+
+### 3.1. Infinite World Generation
+- **Chunk System**: The world is divided into `16x16` tile chunks.
+- **Procedural Generation**: Utilizes **Value Noise** (similar to Perlin Noise) to generate organic, interconnected cave systems rather than random noise.
+- **Infinite Scaling**: Chunks are generated on-demand as players explore. Only active chunks (3x3 radius around players) are kept in memory; others are serialized to disk.
+
+### 3.2. Networking & Synchronization
+- **Authoritative Server**: The server validates all logic (movement, collisions, mining). The client largely acts as a renderer.
+- **Client-Side Prediction**: To ensure zero input lag, the client moves the player immediately upon input.
+- **Reconciliation**: The server verifies the client's position. If a discrepancy (lag/cheat) is detected, the server forces the client to the correct position.
+- **Fog of War**: A server-validated (and client-rendered) Line-of-Sight system ensures players cannot see enemies or ores through walls.
+
+### 3.3. Gameplay Mechanics
+- **Movement**: WASD / Arrow Keys for movement with strict collision detection against cave walls.
+- **Mining & Digging**: 
+  - Players can destroy walls and ores using a precision mouse-click system.
+  - Interactive "Highlighter" shows the targeted block.
+  - Ores (Stone, Copper, Iron, Gold, Diamond) have durability and drop loot into a persistent inventory.
+- **Combat**: 
+  - Enemies spawn dynamically near players.
+  - Simple AI chases players but respects wall collisions (pathfinding basics).
+  - Contact with enemies results in player death and inventory loss.
+
+### 3.4. Visuals & Immersion
+- **Dynamic Lighting**: The game uses Phaser's `Light2D` pipeline. The world is pitch black; players carry light sources that cast shadows and reveal the environment.
+- **Responsive UI**: Full-screen immersive canvas that resizes dynamically with the browser window.
+
+## 4. Directory Structure
+- `/client`: React + Phaser source code.
+  - `/src/game/scenes/MainScene.js`: Main client-side game logic.
+  - `/src/components/GameCanvas.jsx`: React-Phaser bridge.
+- `/server`: Node.js backend.
+  - `/src/game/GameManager.js`: Central controller for game state.
+  - `/src/game/MapGenerator.js`: Procedural generation logic.
+  - `/data`: Persistent storage for current world state.
+
+## 5. Development Roadmap (Current State)
+- [x] Basic Multiplayer Connectivity
+- [x] Infinite Cave Generation
+- [x] Persistent Inventory & Map
+- [x] Mining System
+- [x] Enemy AI with Collision
+- [x] Field of View / Lighting
+- [x] Lag Compensation (Prediction)
+
+## 6. Future Goals
+- **Crafting System**: Use mined resources to upgrade tools or lights.
+- **Combat Upgrade**: Add attack mechanics (swords/bows) for players.
+- **Biomes**: Different cave types (Lava, Ice, Crystal).
+- **Party System**: Grouping mechanics for players.

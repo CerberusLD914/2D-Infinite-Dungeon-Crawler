@@ -1,0 +1,24 @@
+{
+  "CerberusLD": {
+    "id": "1767157512468",
+    "email": "rangerld914@gmail.com",
+    "username": "CerberusLD",
+    "password": "LokI@monster1000",
+    "character": {
+      "color": "#ff000d",
+      "skin": null
+    },
+    "createdAt": 1767157512468
+  },
+  "pepe": {
+    "id": "1767159339548",
+    "email": "pepe@gmail.com",
+    "username": "pepe",
+    "password": "LokI@monster1000",
+    "character": {
+      "color": "#00ff00",
+      "skin": null
+    },
+    "createdAt": 1767159339548
+  }
+}

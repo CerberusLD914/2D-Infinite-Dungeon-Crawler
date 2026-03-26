@@ -1,0 +1,15 @@
+{
+  "name": "dungeon-crawler-root",
+  "version": "1.0.0",
+  "description": "Root project for 2D Dungeon Crawler",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
